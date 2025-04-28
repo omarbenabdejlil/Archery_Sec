@@ -1,0 +1,50 @@
+env:
+  contexts:
+  - authentication:
+      method: browser
+      parameters:
+        browserId: firefox-headless
+        loginPageUrl: https://juice-shop.herokuapp.com/#/login
+        loginPageWait: 2
+      verification:
+        method: poll
+    excludePaths: []
+    includePaths:
+    - prv plan /.*
+    name: simple-json
+    sessionManagement:
+      method: autodetect
+      parameters: {}
+    technology:
+      exclude: []
+    urls:
+    - 'private plan '
+    users:
+    - credentials:
+        password: aaaaa
+        username: a@a
+      name: test
+  parameters:
+    failOnError: true
+    failOnWarning: false
+    progressToStdout: true
+  vars: {}
+jobs:
+- name: spider
+  parameters: {}
+  type: spider
+- name: spiderAjax
+  parameters:
+    inScopeOnly: true
+    maxCrawlDepth: 10
+    maxDuration: 2
+    numberOfBrowsers: 16
+  type: spiderAjax
+- name: passiveScan-config
+  parameters:
+    disableAllRules: true
+    enableTags: false
+    maxAlertsPerRule: 0
+    maxBodySizeInBytesToScan: 0
+    scanOnlyInScope: true
+  type: passiveScan-config

@@ -1,0 +1,664 @@
+{% extends 'base/site_base.html' %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-md-flex align-items-center ">
+                        <h1 class="card-title">Dynamic Scan </h1>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <form id="start_scan" class="form-horizontal">
+                                    {% csrf_token %}
+                                    <div class=" row ">
+                                        <div class="col-sm">
+                                            <div class="form-group row ">
+                                                <label class="col-sm-2 text-center control-label col-form-label">Group
+                                                    :</label>
+                                                <div class="col-md-9 dtsb-criteria">
+                                                    <select id="group_id" name="group_id"
+                                                            class=" form-control dtsb-data dtsb-dropDown "
+                                                            style="width: 100%; height:36px;">
+                                                        <option value="" >-------</option>
+                                                        {% for data in groups %}
+                                                            <option value="{{ data.uu_id }}">{{ data.group_name }}
+                                                            </option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div class="form-group row  ">
+                                                <label class="col-sm-2 text-center control-label col-form-label">Project
+                                                    :</label>
+                                                <div class="col-md-9 dtsb-criteria">
+                                                    <select  id="project_id" name="project_id"
+                                                            class=" form-control dtsb-data dtsb-dropDown"
+                                                            style="width: 100%; height:36px;">
+                                                        <option value="" >-------</option>
+                                                        {% for data in projects %}
+                                                            <option value="{{ data.uu_id }}">{{ data.project_name }}
+                                                            </option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {#  Scan  and attack types choice  #}
+            <div class="card">
+                <div class="card-body">
+                    <div class=" row ">
+                        <div class="col-sm-6">
+                            <div class="form-group row ">
+                                <label class="col-sm-2 text-center control-label col-form-label">Scan Type :</label>
+                                <div class="col-md-9 dtsb-criteria">
+                                    <select id="scanType" name="scanType"
+                                            class=" form-control dtsb-data dtsb-dropDown "
+                                            style="width: 100%; height:36px;">
+                                        <option selected>-------</option>
+                                        <option value="ZAP">OWASP ZAP</option>
+                                        <option value="other">Other tools</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" id="attackTypeContainer" style="display: none;">
+                            <div class="form-group row  ">
+                                <label class="col-sm-2 text-center control-label col-form-label">ZAP Action</label>
+                                <div class="col-md-9 dtsb-criteria">
+                                    <select id="attackType" name="attackType"
+                                            class=" form-control dtsb-data dtsb-dropDown "
+                                            style="width: 100%; height:36px;">
+                                        <option selected>-------</option>
+                                        <option>Full Scan</option>
+                                        <option>Automation Framework</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {#  Jobs Section  #}
+    <div class="card" id="scanDetails" style="display: none;">
+        {% include 'webscanners/zapscanner/jobs.html' %}
+    </div>
+
+    {# full scan section  #}
+    <div class="card" id="fullScan" style="display: none;">
+        {% include 'webscanners/zapscanner/zap_fullScan.html' %}
+    </div>
+
+    {#  Script Section   #}
+    <div class="card" id="scriptDetails" style="display: none">
+    </div>
+
+    {#    AF section ( Jobs )  #}
+
+    <div class="card" id="af" style="display: none">
+        <div class="" style="padding: 3px 1px 2px 3px;">
+            <h6 class="card-title card-header">AF Plans</h6>
+        </div>
+        <div class="card-body">
+            <div class="float-right" style="padding-bottom: 10px">
+                {% if user.is_superuser == True or user.role.id == 2 %}
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button data-toggle="modal" data-target="#afPlanPopUp" class="btn btn-sm btn-success"
+                                data-placement="top" title="Upload New Plan ">
+                                <i class="fa fa-upload" aria-hidden="true"></i>
+                        </button>
+
+                    </div>
+                    
+
+                    <button class="btn btn-sm btn-danger m-r-0 "
+                            onclick="delete_selected_plans()"
+                            data-toggle="tooltip" data-placement="top" title="Delete Plan">
+                                <i class="fas fa-trash "></i>
+                    </button>
+
+                {% endif %}
+            </div>
+
+            <div id="af-table">
+
+            </div>
+
+        </div>
+    </div>
+
+
+    {#    buttons #}
+    <div class="card">
+        <div class="card-body">
+            <div class="controls">
+                <input type="submit" class="btn btn-primary" value="Launch" onclick="launchScan()">
+                <input data-toggle="modal" data-target="#scheduleScan" data-whatever="@mdo" class="btn btn-success"
+                       type="submit" value="Schedule Scan">
+                {#                <a href="{% url 'webscanners:web_scan_schedule' %}" class="btn btn-success">Scan Schedule</a>#}
+            </div>
+            <div id='status'></div>
+        </div>
+    </div>
+
+    {#   schedule scan pop UP ( still doesnt work  #}
+    <div class="modal" id="scheduleScan" tabindex="-1" role="dialog" aria-labelledby="scheduleScan"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content ">
+                <div class="modal-header card-header">
+                    <h5 class="modal-title " id="exampleModalLabel">Schedule a Scan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group ">
+                        <label class="col-sm-3 text-right control-label col-form-label">Periodic Scan :</label>
+                        <div class="col-md-9">
+                            <select name="periodic_task_value" id="periodic_task_value"
+                                    class="select2 form-control custom-select" style="width: 100%; height:36px;">
+                                <option selected> --------</option>
+                                <option value="None">None ( only once )</option>
+                                <option value="HOURLY">Task Hourly</option>
+                                <option value="DAILY">Task Daily</option>
+                                <option value="WEEKLY">Task Weekly</option>
+                                {#                                <option value="EVERY_2_WEEKS">Task Every 2 Weeks</option>#}
+                                {#                                <option value="EVERY_4_WEEKS">Task Every 4 Weeks</option>#}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" id="date_time_input" style="display:none;">
+                        <label class="col-sm-3 text-right control-label col-form-label">Date & Time:</label>
+                        <div class="col-md-9">
+                            <input min="" type="datetime-local" id="datetimePicker" name="calendar"
+                                   class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group row" id="hourly_input" style="display:none;">
+                        <label class="col-sm-3 text-right control-label col-form-label">Every X Hours:</label>
+                        <div class="col-md-9">
+                            <input min="1" type="number" id="hourly_hours" name="hourly_hours" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group row" id="daily_input" style="display:none;">
+                        <label class="col-sm-3 text-center control-label col-form-label">Time:</label>
+                        <div class="col-md-9">
+                            <input min="" type="time" id="daily_time" name="daily_time" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group row" id="weekly_input" style="display:none;">
+                        <label class="col-sm-3 text-center control-label col-form-label">Day:</label>
+                        <div class="">
+                            <select name="weekly_day" id="weekly_day"
+                                    class="select2 form-control custom-select col-md-8">
+                                <option value="mon">Monday</option>
+                                <option value="tue">Tuesday</option>
+                                <option value="wed">Wednesday</option>
+                                <option value="thu">Thursday</option>
+                                <option value="fri">Friday</option>
+                                <option value="sat">Saturday</option>
+                                <option value="sun">Sunday</option>
+                            </select>
+                        </div>
+                        <label class="col-sm-3 text-center control-label col-form-label">Time:</label>
+                        <div class="col-md-9">
+                            <input min="" type="time" id="weekly_time" name="weekly_time" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" onclick="runScheduleScan()">Done</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    <script>
+
+        function getFullScanData() {
+            var groupId = document.getElementById('group_id').value;
+            var projectId = document.getElementById('project_id').value;
+            var scanType = document.getElementById('scanType').value;
+            var attackType = document.getElementById('attackType').value;
+
+            // Construct the data to be sent in the POST request
+            var data = new FormData();
+            data.append('group_id', groupId);
+            data.append('project_id', projectId);
+            data.append('scan_type', scanType);
+            data.append('attack_type', attackType);
+
+            if (attackType === "Full Scan") {
+                var checkedCheckboxes = getCheckedCheckboxes();
+                var allCheckboxes = ['auth', 'spider', 'ajaxSpider', 'passive', 'active'];
+                allCheckboxes.forEach(function (checkbox) {
+                    var isChecked = checkedCheckboxes.includes(checkbox);
+                    data.append(checkbox, isChecked);
+                });
+                checkedCheckboxes = []; // delete selected checkbox
+                // get the ajax configuration via the pop up
+                if (ajaxConfig) {
+                    for (var key in ajaxConfigData) {
+                        data.append(key, ajaxConfigData[key]);
+                    }
+                    ajaxConfig = false
+                }
+                if (spiderConfig) {
+                    for (var key in spiderConfigData) {
+                        data.append(key, spiderConfigData[key]);
+                    }
+                    spiderConfig = false
+                }
+
+                var targetUrls = document.getElementById('targetUrls').value;
+                var includeRegex = document.getElementById('includeRegex').value;
+                var excludeRegex = document.getElementById('excludeRegex').value;
+                // and add the others options
+                data.append('include_regex', includeRegex);
+                data.append('exclude_regex', excludeRegex);
+                data.append('target_urls', targetUrls);
+            }
+            return data
+        }
+
+        function launchScan() {
+
+            var attackType = document.getElementById('attackType').value;
+            var projectId = document.getElementById('project_id').value;
+            if (projectId === "") {
+                alert("Please select a project");
+                return false; // Prevent form submission
+            }
+
+
+            if (attackType === "Full Scan") {
+                var fullScanData = getFullScanData()
+
+
+                // Create a new XMLHttpRequest object
+                var xhr = new XMLHttpRequest();
+                // Configure the XMLHttpRequest object
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            window.location.href = "{% url 'projects:project_scans' %}?uu_id=" + projectId;
+                        } else {
+                            // console.error("Error: send data to full scan ", xhr.status);
+                        }
+                    }
+                };
+                // Open the XMLHttpRequest object with the POST method and specify the URL
+                xhr.open('POST', "{% url 'webscanners:dast' %}", false);
+                const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                xhr.send(fullScanData);
+
+            } else if  (attackType  === 'Automation Framework')  {
+                var fullScanData = getFullScanData() // just to get pre selections data ( proj / grp etc )
+
+                var checkboxes = document.querySelectorAll('input[name="plans_uu_id"]:checked');
+                var checkedValues = [];
+
+                checkboxes.forEach(function (checkbox) {
+                    checkedValues.push(checkbox.value);
+
+                });
+                var xhr = new XMLHttpRequest();
+                checkedValues.forEach(function (value) {
+                    fullScanData.append('checked_plans', value);
+                });
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            window.location.href = "{% url 'projects:project_scans' %}?uu_id=" + projectId;
+                        } else
+                            document.location.reload();
+                        }
+                    }
+
+                xhr.open('POST', "{% url 'zapscanner:run_plan' %}", false);
+                const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                xhr.send(fullScanData);
+
+            }
+
+        }
+
+        function my_special_notification_callback(data) {
+            for (var i = 0; i < data.unread_list.length; i++) {
+                msg = data.unread_list[i];
+                console.log(msg);
+            }
+        }
+
+        document.getElementById('scanType').addEventListener('change', function () {
+            {# document.getElementById('scriptDetails').style.display = 'none';#}
+            var selectedScanType = this.value;
+            var attackTypeContainer = document.getElementById('attackTypeContainer');
+            var scanDetailsId = document.getElementById('scanDetails');
+
+            // If OWASP ZAP is selected, show the Attack Type container; otherwise, hide it
+            if (selectedScanType === 'ZAP') {
+                attackTypeContainer.style.display = 'block';
+            } else {
+                attackTypeContainer.style.display = 'none';
+                scanDetailsId.style.display = 'none';
+
+            }
+        });
+
+
+        {#// load section depend on owasp zap attack type #}
+        document.getElementById('attackType').addEventListener('change', function () {
+            checkedCheckboxes = [];
+            ajaxConfig = false;
+            spiderConfig = false;
+
+            var selectedAttackType = this.value;
+            document.getElementById('af').style.display = 'none';
+            document.getElementById('scriptDetails').style.display = 'none';
+            document.getElementById('fullScan').style.display = 'none';
+
+            {#if (selectedAttackType === 'script') {#}
+            {#    document.getElementById('scriptDetails').style.display = 'block';#}
+            {#    var xhr = new XMLHttpRequest();#}
+            {#    xhr.onreadystatechange = function () {#}
+            {#        if (xhr.readyState === 4) {#}
+            {#            if (xhr.status === 200) {#}
+            {#                document.getElementById('scriptDetails').innerHTML = xhr.responseText;#}
+            {#            } else {#}
+            {#                console.error("Error: fetching zap script content", xhr.status); // Log an error if the AJAX request fails#}
+            {#            }#}
+            {#        }#}
+            {#    };#}
+            {#    xhr.open('GET', "{% url 'zapscanner:script_section_content' %}", false);#}
+            {#    xhr.send();#}
+            {##}
+            {# } else if (selectedAttackType === 'Automation Framework') {#}
+            if (selectedAttackType === 'Automation Framework') {
+                document.getElementById('af').style.display = 'block';
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            document.getElementById('af-table').innerHTML = xhr.responseText;
+                        } else {
+                            console.error("Error: fetching zap af content", xhr.status); // Log an error if the AJAX request fails
+                        }
+                    }
+                };
+                xhr.open('GET', "{% url 'zapscanner:af_section_content' %}", false);
+                xhr.send();
+
+            } else if (selectedAttackType === 'Full Scan') {
+                document.getElementById('fullScan').style.display = 'block';
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            document.getElementById('fullScan').innerHTML = xhr.responseText;
+                        } else {
+                            console.error("Error: fetching zap full scan content");
+                        }
+                    }
+                };
+                xhr.open('GET', "{% url 'zapscanner:full_scan_content' %}", false);
+                xhr.send();
+            }
+        });
+
+        document.getElementById('scanType').addEventListener('change', function () {
+            var scantype = this.value;
+            if (scantype !== 'OWASP ZAP') {
+                document.getElementById('scriptDetails').style.display = 'none';
+                document.getElementById('af').style.display = 'none';
+                document.getElementById('fullScan').style.display = 'none';
+                checkedCheckboxes = []; // delete selected checkbox
+
+            }
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(document).on('click', '.confirm-delete', function () {
+            return confirm('Are you sure you want to delete this?');
+        })
+
+        function reload_af(){
+             window.addEventListener('DOMContentLoaded', function () {
+                document.getElementById('scanType').value = 'ZAP';
+                document.getElementById('attackType').value = 'Automation Framework';
+                document.getElementById('attackTypeContainer').style.display = 'block';
+
+                document.getElementById('af').style.display = 'block';
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            document.getElementById('af-table').innerHTML = xhr.responseText;
+                        } else {
+                            console.error("Error: fetching zap af content", xhr.status); // Log an error if the AJAX request fails
+                        }
+                    }
+                };
+                xhr.open('GET', "{% url 'zapscanner:af_section_content' %}", false);
+                xhr.send();
+
+
+            });
+
+        }
+
+        {% if redirected_zap %}
+            reload_af();
+
+        {% endif %}
+
+        {% if redirected_from_project_scans %}
+            window.addEventListener('DOMContentLoaded', function () {
+                document.getElementById('group_id').value = '{{ group_uuid }}';
+                document.getElementById('project_id').value = '{{ project_uuid }}';
+            });
+        {% endif %}
+
+
+
+        // schedule scripts
+        document.getElementById('periodic_task_value').addEventListener('change', function () {
+            var selectedValue = this.value;
+            var date_time_input = document.getElementById('date_time_input');
+            var hourly_input = document.getElementById('hourly_input');
+            var daily_input = document.getElementById('daily_input');
+            var weekly_input = document.getElementById('weekly_input');
+
+            if (selectedValue === 'None') {
+                date_time_input.style.display = 'block';
+                hourly_input.style.display = 'none';
+                daily_input.style.display = 'none';
+                weekly_input.style.display = 'none';
+            } else if (selectedValue === 'HOURLY') {
+                date_time_input.style.display = 'none';
+                hourly_input.style.display = 'block';
+                daily_input.style.display = 'none';
+                weekly_input.style.display = 'none';
+            } else if (selectedValue === 'DAILY') {
+                date_time_input.style.display = 'none';
+                hourly_input.style.display = 'none';
+                daily_input.style.display = 'block';
+                weekly_input.style.display = 'none';
+            } else if (selectedValue === 'WEEKLY') {
+                date_time_input.style.display = 'none';
+                hourly_input.style.display = 'none';
+                daily_input.style.display = 'none';
+                weekly_input.style.display = 'block';
+            } else {
+                date_time_input.style.display = 'none';
+                hourly_input.style.display = 'none';
+                daily_input.style.display = 'none';
+                weekly_input.style.display = 'none';
+            }
+        });
+
+        function scheduling() {
+            var selectedValue = document.getElementById('periodic_task_value').value;
+            var formData = {'periodic': selectedValue};
+
+            if (selectedValue === 'None') {
+                formData['date_time'] = document.getElementById('datetimePicker').value;
+            } else if (selectedValue === 'HOURLY') {
+                formData['hours'] = document.getElementById('hourly_hours').value;
+            } else if (selectedValue === 'DAILY') {
+                formData['time'] = document.getElementById('daily_time').value;
+            } else if (selectedValue === 'WEEKLY') {
+                formData['day'] = document.getElementById('weekly_day').value;
+                formData['time'] = document.getElementById('weekly_time').value;
+            }
+            return formData;
+        }
+
+        function runScheduleScan() {
+            var scheduleData = scheduling();
+            selectedAttackType = document.getElementById('attackType').value;
+            var projectId = document.getElementById('project_id').value;
+             if (projectId === "") {
+                alert("Please select a project");
+                return false; // Prevent form submission
+            }
+
+            if (selectedAttackType === 'Full Scan') {
+                var fullData = getFullScanData();
+                console.log(scheduleData)
+                // convert to FormData to send it with ajax as post req
+                for (var key in scheduleData) {
+                    fullData.append(key, scheduleData[key]);
+                }
+
+                var xhr = new XMLHttpRequest();
+
+                // Configure the XMLHttpRequest object
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            window.location.href = "{% url 'projects:project_scans' %}?uu_id=" + projectId;
+                        } else {
+                            console.log(xhr.status + ": " + xhr.responseText);
+                        }
+                    }
+                };
+
+                // Open the XMLHttpRequest object with the POST method and specify the URL
+                xhr.open('POST', "{% url 'webscanners:launch_schedule_zapfullscan' %}", false);
+                const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+
+                // Send the FormData object
+                xhr.send(fullData);
+            } else if (selectedAttackType === 'Automation Framework') {
+                 var checkboxes = document.querySelectorAll('input[name="plans_uu_id"]:checked');
+                 var checkedValues = [];
+
+                checkboxes.forEach(function (checkbox) {
+                    checkedValues.push(checkbox.value);
+
+                });
+                scan_data=getFullScanData()
+                checkedValues.forEach(function (value) {
+                    scan_data.append('checked_plans', value);
+                });
+
+                 for (var key in scheduleData) {
+                    scan_data.append(key, scheduleData[key]);
+                }
+                var xhr = new XMLHttpRequest();
+                 xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            window.location.href = "{% url 'projects:project_scans' %}?uu_id=" + projectId;
+                        } else {
+                            document.location.reload();
+
+                        }
+                    }
+                };
+
+                xhr.open('POST', "{% url 'webscanners:launch_schedule_zapfullscan' %}", false);
+                const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                xhr.send(scan_data);
+
+            }
+
+            $('#scheduleScan').modal('hide');
+        }
+
+
+        function delete_selected_plans(){
+            if (confirm('Are you sure you want to delete selected plans?')) {
+
+                var checkboxes = document.querySelectorAll('input[name="plans_uu_id"]:checked');
+                     var checkedValues = [];
+
+                    checkboxes.forEach(function (checkbox) {
+                        checkedValues.push(checkbox.value);
+
+                    });
+                    console.log(checkedValues)
+
+                    var data = new FormData();
+                    checkedValues.forEach(function (value) {
+                        data.append('checked_plans', value);
+                    });
+                    var xhr = new XMLHttpRequest();
+                     xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4) {
+                            if (xhr.status === 200) {
+                                console.log("its called here ");
+                                var response = JSON.parse(xhr.responseText);
+                                if (response.redirect) {
+                                    console.log("redirected")
+                                    window.location.href = "{% url 'webscanners:dast_scans' %}";
+                                }
+                            }  else {
+                                // nothing
+
+                            }
+                        }
+                     };
+
+                    xhr.open('POST', "{% url 'zapscanner:delete_plan' %}", false);
+                    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    xhr.send(data);
+        }
+        }
+
+    </script>
+{% endblock %}
+
+

@@ -1,0 +1,76 @@
+{% extends 'base/site_base.html' %}
+{% block body %}
+    <div style="background-color: #F5F5F5; padding: 5px 5px; border: none; color: #000; text-align: left;">
+        <!-- Breadcrumb links here -->
+        <a href="/dashboard/" title="Go to Home" style="color: #000; text-decoration: none; ">Home</a>
+        <span style="color: #000;"> > </span>
+
+        {% if  project_dat.group.group_name != none %}
+            <a href="{% url 'groups:groups_list' %}?name={{ project_dat.group.group_name }}" class="current"
+               style="font-weight: bold;">{{ project_dat.group.group_name }}</a>
+        {% endif %}
+        <span style="color: #000;"> > </span>
+        {% if  project_dat.project_name != none %}
+            <a href="{% url 'projects:project_overview' %}?uu_id={{ project_dat.uu_id }}" class="current"
+               style="font-weight: bold;">{{ project_dat.project_name }}</a>
+        {% endif %}
+
+    </div>
+    <hr>
+<div class="container-fluid">
+    <h2>{{ project_dat.project_name | title }}</h2>
+    <div class="row nav-links rounded  " style="background-color: whitesmoke; height: 35px;">
+        <div class="col-sm vertical d-flex align-items-center  ">
+            <a class="nav-link" href="{% url 'projects:project_overview' %}?uu_id={{ project_dat.uu_id }}">Overview</a>
+        </div>
+        <div class="col-sm vertical d-flex align-items-center">
+            <a class="nav-link" href="{% url 'projects:project_metrics' %}?uu_id={{ project_dat.uu_id }}">Metrics</a>
+        </div>
+        <div class="col-sm vertical d-flex align-items-center">
+            <a class="nav-link" href="{% url 'projects:project_vuln' %}?uu_id={{ project_dat.uu_id }}&severity=Total">Vulnerabilities</a>
+        </div>
+        <div class="col-sm vertical d-flex align-items-center">
+            <a class="nav-link" href="{% url 'projects:project_scans' %}?uu_id={{ project_dat.uu_id }}">Scans</a>
+        </div>
+        <div class="col-sm vertical d-flex align-items-center">
+            <a class="nav-link" href="{% url 'projects:project_settings' %}?uu_id={{ project_dat.uu_id }}">Settings</a>
+        </div>
+    </div>
+    {% block content %}
+    {% endblock %}
+</div>
+
+<style>
+    .vertical {
+        border-left: 2px solid #7c7a7a;
+        padding-left: 10px;
+        margin-left: 10px;
+        height: 100%;
+
+    }
+
+    .vertical:first-child {
+        border-left: none;
+        margin-left: 0;
+    }
+
+    .nav-link:hover {
+        color: #1b3550 !important;
+        font-size: 16px !important;
+        font-weight: bold;
+    }
+
+    .nav-link {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+
+    a{
+        margin: auto;
+    }
+
+</style>
+
+
+{% endblock %}

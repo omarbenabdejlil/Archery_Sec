@@ -1,0 +1,47 @@
+{% extends 'dashboard/base.html' %}
+
+{% block body %}
+
+    <div class="row justify-content-md-center">
+        <div class="col-10">
+            <div class="card" >
+                <div class="card-body" >
+                    <div class="d-md-flex align-items-center" >
+                        <h1 class="card-title">Create Group</h1>
+                    </div>
+                    <br>
+                    <div class="card" >
+                        <div class="card-body">
+                            <div class="col-md-12">
+                                <form class="form-horizontal" method="POST"
+                                      action="{% url 'groups:group_create' %}">
+                                    {% csrf_token %}
+                                    <div class="form-group ">
+                                        <label>Name</label>
+                                        <input name="group_name" class="form-control" type="text" placeholder="Name">
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <label>Description</label>
+                                        <input name="group_description" class="form-control" type="text" placeholder="Description">
+                                    </div>
+                                    
+                                    <br>
+                                    
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-success">Save</button>
+                                    </div>
+                                </form>
+                                <hr>
+                                <br>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

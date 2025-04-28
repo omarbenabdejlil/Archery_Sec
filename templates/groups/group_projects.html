@@ -1,0 +1,194 @@
+{% extends 'base/site_base.html' %}
+{% load static %}
+
+{% block body %}
+    <div style="background-color: #F5F5F5; padding: 5px 5px; border: none; color: #000; text-align: left;">
+        <!-- Breadcrumb links here -->
+        <a href="/dashboard/" title="Go to Home" style="color: #000; text-decoration: none; ">Home</a>
+        <span style="color: #000;"> > </span>
+        <a href="/groups/" style="font-weight: bold;">Groups </a>
+        <span style="color: #000;"> > </span>
+        <a href="" class="current" class="current" style="font-weight: bold;">{{ group.group_name | title }} </a>
+    </div>
+
+    <hr>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-body">
+                    <div class="float-right">
+                        {% if user.is_superuser == True %}
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a href="{% url 'projects:project_create' %}?name={{ group.group_name }}"
+                                   class="btn btn-primary btn-mini" data-toggle="tooltip" data-placement="top"
+                                   title="Create New Project"><i
+                                        class="fas fa-plus-circle"></i> Add Project</a>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-md-flex align-items-center">
+                        <div>
+                            <h1>{{ group.group_name | title }} Group</h1>
+                            <h5 class="card-subtitle">{{ group.group_description }}</h5>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <!-- column -->
+
+                        <div class="table-responsive">
+                            <table id="data_table" class="table table-bordered data-table">
+                                <thead>
+                                <tr>
+                                    <th>Project</th>
+                                    <th>Created By</th>
+                                    <th>Total</th>
+                                    <th>Critical</th>
+                                    <th>High</th>
+                                    <th>Medium</th>
+                                    <th>Low</th>
+                                    <th>Delete</th>
+
+                                    {#                                                #}
+                                    {#                                                <th>Project</th>#}
+                                    {#                                                <th>Created By</th>#}
+                                    {#                                                <th>Created At</th >  <td>{{ data.created_time }}</td>  #}
+                                    {#                                                <th>Delete</th>#}
+                                </tr>
+                                </thead>
+                                <tbody>{% for data in projects %}
+                                    <tr data-target="#">
+                                        <td>
+                                            <a href="{% url 'projects:project_overview' %}?uu_id={{ data.uu_id }}"
+                                               style="font-weight: bold;"
+                                            > {{ data.project_name }}</a>
+                                        </td>
+                                        <td>{{ data.created_by.name }}</td>
+                                        <td><span
+                                                class="badge badge-pill badge-purple">{{ data.total_vuln }}</span>
+                                        </td>
+
+                                        <td><span
+                                                class="badge badge-pill badge-critical">{{ data.total_critical }}</span>
+                                        </td>
+                                        <td> <span
+                                                class="badge badge-pill badge-danger">{{ data.total_high }}</span>
+                                        </td>
+                                        <td> <span
+                                                class="badge badge-pill badge-warning">{{ data.total_medium }}</span>
+                                        </td>
+                                        <td> <span
+                                                class="badge badge-pill badge-info">{{ data.total_low }}</span>
+                                        </td>
+
+
+                                        <td class="confirm-delete">
+                                            <form action="{% url 'projects:project_delete' %}" method="POST">
+                                                <input type="hidden" name="project_id"
+                                                       value="{{ data.uu_id }}"/>
+                                                {% csrf_token %}
+                                                <button class="btn btn-danger btn-sm" data-toggle="tooltip"
+                                                        data-placement="top" title="Delete Project"><i
+                                                        class="m-r-0 mdi mdi-delete"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar Content -->
+        <aside class="col-md-3">
+            <!-- Metadata Section -->
+            <div class="card mt-2">
+                <div class="card-body">
+                    <h6>Metadata</h6>
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class=" table table-striped ">
+                                <tbody>
+                                <tr>
+                                    <td>Group owner</td>
+                                    <td>{{ group.created_by.name }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Total projects</td>
+                                    <td>{{ group.total_projects }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Metrics Section -->
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5>Group Vulnerability </h5>
+
+                    <div>
+                        <canvas id="ProBar"></canvas>
+                    </div>
+                </div>
+
+
+            </div>
+        </aside>
+    </div>
+    <script src="{% static 'js/Chart.js' %}"></script>
+    <script src="{% static 'js/Chart.min.js' %}"></script>
+    <script type="text/javascript">
+
+        $(document).on('click', '.confirm-delete', function () {
+            return confirm('Are you sure you want to delete this Note?');
+        })
+
+
+        var ctx = document.getElementById("ProBar").getContext('2d');
+        var ProBar = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [
+                        {{all_critical}},
+                        {{all_high}},
+                        {{all_medium}},
+                        {{all_low}},
+
+                    ],
+                    backgroundColor: [
+                        '#790505', '#bd3f3b', '#ff7800', '#1b7ec7'
+
+                    ],
+                    label: 'Venerability'
+                }],
+                labels: [
+                    'Critical',
+                    'High',
+                    'Medium',
+                    'Low',
+                ]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: false,
+                    text: 'Vulnerability found in Project'
+                },
+                legend: {
+                    position: 'right', // or 'left', 'top', 'bottom'
+                },
+            }
+        });
+
+
+    </script>
+
+{% endblock %}

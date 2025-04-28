@@ -1,0 +1,650 @@
+ERROR:django.request: Internal Server Error: /dockle/dockle_all_vuln/ (2024-05-22 15:52:37; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 423, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such column: docklescandb.target
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/compliance/dockle/views.py", line 88, in get
+    return render(
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/test/utils.py", line 100, in instrumented_test_render
+    return self.nodelist.render(context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/test/utils.py", line 100, in instrumented_test_render
+    return self.nodelist.render(context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/test/utils.py", line 100, in instrumented_test_render
+    return self.nodelist.render(context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/defaulttags.py", line 171, in render
+    len_values = len(values)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/query.py", line 262, in __len__
+    self._fetch_all()
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/query.py", line 1324, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1175, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 79, in _execute
+    with self.db.wrap_database_errors:
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 423, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such column: docklescandb.target
+ERROR:django.request: Internal Server Error: / (2024-05-22 16:11:54; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/contrib/sessions/backends/base.py", line 233, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 423, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: django_session
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 171, in _get_response
+    response = middleware_method(request, callback, callback_args, callback_kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/stronghold/middleware.py", line 32, in process_view
+    or conf.STRONGHOLD_USER_TEST_FUNC(request.user)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/stronghold/conf.py", line 18, in is_authenticated
+    return user.is_authenticated()
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/utils/functional.py", line 246, in inner
+    self._setup()
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/utils/functional.py", line 382, in _setup
+    self._wrapped = self._setupfunc()
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/contrib/auth/middleware.py", line 23, in <lambda>
+    request.user = SimpleLazyObject(lambda: get_user(request))
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/contrib/auth/middleware.py", line 11, in get_user
+    request._cached_user = auth.get_user(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/contrib/auth/__init__.py", line 177, in get_user
+    user_id = _get_user_session_key(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/contrib/auth/__init__.py", line 60, in _get_user_session_key
+    return get_user_model()._meta.pk.to_python(request.session[SESSION_KEY])
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/contrib/sessions/backends/base.py", line 65, in __getitem__
+    return self._session[key]
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/contrib/sessions/backends/base.py", line 238, in _get_session
+    self._session_cache = self.load()
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/contrib/sessions/backends/db.py", line 43, in load
+    s = self._get_session_from_db()
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/contrib/sessions/backends/db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/query.py", line 431, in get
+    num = len(clone)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/query.py", line 262, in __len__
+    self._fetch_all()
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/query.py", line 1324, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1175, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 79, in _execute
+    with self.db.wrap_database_errors:
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 423, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: django_session
+ERROR:django.request: Internal Server Error: /projects/project_create/ (2024-05-22 16:19:26; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/projects/views.py", line 763, in post
+    group = GroupDb.objects.filter(group_name="Standalone", organization=request.user.organization).get()
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/query.py", line 435, in get
+    raise self.model.DoesNotExist(
+groups.models.GroupDb.DoesNotExist: GroupDb matching query does not exist.
+INFO:apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts (2024-05-22 16:25:00; base.py:454)
+INFO:apscheduler.scheduler: Added job " run scheduled zap scan against testproject. " to job store "default" (2024-05-22 16:25:00; base.py:895)
+INFO:apscheduler.scheduler: Scheduler started (2024-05-22 16:25:00; base.py:181)
+INFO:apscheduler.scheduler: Removed job 67947963-bcee-476c-9303-877c800ea794 (2024-05-22 16:25:03; base.py:641)
+ERROR:django.request: Internal Server Error: / (2024-05-22 17:08:12; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/dashboard/views.py", line 225, in dashboard
+    return render(
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/base.py", line 168, in render
+    with context.bind_template(self):
+  File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/debug_toolbar/panels/templates/panel.py", line 40, in _request_context_bind_template
+    processors = template.engine.template_context_processors + self._processors
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/utils/functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/engine.py", line 85, in template_context_processors
+    return tuple(import_string(path) for path in context_processors)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/template/engine.py", line 85, in <genexpr>
+    return tuple(import_string(path) for path in context_processors)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/utils/module_loading.py", line 17, in import_string
+    module = import_module(module_path)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'django_settings_export'
+WARNING:django.request: Not Found: /_appmap/record (2024-05-23 13:16:53; log.py:224)
+WARNING:django.request: Not Found: /_appmap/record (2024-05-23 13:16:53; log.py:224)
+WARNING:django.request: Not Found: /_appmap/record (2024-05-23 13:17:25; log.py:224)
+WARNING:django.request: Not Found: /_appmap/record (2024-05-23 13:17:25; log.py:224)
+WARNING:django.request: Not Found: /_appmap/record (2024-05-23 13:20:55; log.py:224)
+WARNING:django.request: Not Found: /_appmap/record (2024-05-23 13:20:55; log.py:224)
+INFO:_appmap.web_framework: Requests will be recorded (Django) (2024-05-23 13:22:10; web_framework.py:162)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716463360_439777_http_localhost_8000_projects_.appmap.json (2024-05-23 13:22:40; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716463367_66572_http_localhost_8000_projects_project_create_.appmap.json (2024-05-23 13:22:47; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716463380_43031_http_localhost_8000_projects_project_create_.appmap.json (2024-05-23 13:23:00; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716463380_546746_http_localhost_8000_projects_.appmap.json (2024-05-23 13:23:00; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716463383_625998_http_localhost_8000_projects_overview_uu_id_3457188d-d63d-4bd1-add8-dac59f3a2ec0.appmap.json (2024-05-23 13:23:03; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716463388_388253_http_localhost_8000_projects_project_metrics_uu_id_3457188d-d63d-4bd1-add8-dac59f3a2ec0.appmap.json (2024-05-23 13:23:08; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716463390_397481_http_localhost_8000_projects_project_vuln_uu_id_3457188d-d63d-4bd1-add8-dac59f3a2ec0_severity_Total.appmap.json (2024-05-23 13:23:10; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716463392_373479_http_localhost_8000_projects_project_scans_uu_id_3457188d-d63d-4bd1-add8-dac59f3a2ec0.appmap.json (2024-05-23 13:23:12; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716463393_566232_http_localhost_8000_projects_project_edit_uu_id_3457188d-d63d-4bd1-add8-dac59f3a2ec0.appmap.json (2024-05-23 13:23:13; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716463395_833673_http_localhost_8000_projects_project_scans_uu_id_3457188d-d63d-4bd1-add8-dac59f3a2ec0.appmap.json (2024-05-23 13:23:15; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716463397_551259_http_localhost_8000_projects_redirect_to_dast_.appmap.json (2024-05-23 13:23:17; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716463397_626538_http_localhost_8000_webscanners_dast_.appmap.json (2024-05-23 13:23:17; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716463399_451744_http_localhost_8000_report-upload_upload_.appmap.json (2024-05-23 13:23:19; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716463401_314098_http_localhost_8000_projects_project_vuln_uu_id_3457188d-d63d-4bd1-add8-dac59f3a2ec0_severity_Total.appmap.json (2024-05-23 13:23:21; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716463404_405249_http_localhost_8000_projects_project_vuln_uu_id_3457188d-d63d-4bd1-add8-dac59f3a2ec0_severity_Critical.appmap.json (2024-05-23 13:23:24; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716463405_873187_http_localhost_8000_projects_project_vuln_uu_id_3457188d-d63d-4bd1-add8-dac59f3a2ec0_severity_Medium.appmap.json (2024-05-23 13:23:25; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716463407_65632_http_localhost_8000_projects_project_metrics_uu_id_3457188d-d63d-4bd1-add8-dac59f3a2ec0.appmap.json (2024-05-23 13:23:27; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716467360_900697_http_localhost_8000_.appmap.json (2024-05-23 14:29:20; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716467360_933135_http_localhost_8000_auth_login_next_.appmap.json (2024-05-23 14:29:20; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716467361_065884_http_localhost_8000_static_img_glyphicons-halflings_png.appmap.json (2024-05-23 14:29:21; recording.py:78)
+WARNING:django.request: Not Found: /static/img/glyphicons-halflings.png (2024-05-23 14:29:21; log.py:224)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716467368_349857_http_localhost_8000_auth_auth_.appmap.json (2024-05-23 14:29:28; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716467368_545635_http_localhost_8000_dashboard_.appmap.json (2024-05-23 14:29:28; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716467373_69403_http_localhost_8000_projects_.appmap.json (2024-05-23 14:29:33; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716467376_90588_http_localhost_8000_groups_.appmap.json (2024-05-23 14:29:36; recording.py:78)
+INFO:_appmap.web_framework: Requests will be recorded (Django) (2024-05-23 17:39:53; web_framework.py:162)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716478799_589744_http_localhost_8000_.appmap.json (2024-05-23 17:39:59; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716478803_978388_http_localhost_8000_projects_.appmap.json (2024-05-23 17:40:03; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716478806_320088_http_localhost_8000_projects_overview_uu_id_3457188d-d63d-4bd1-add8-dac59f3a2ec0.appmap.json (2024-05-23 17:40:06; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716478807_835217_http_localhost_8000_projects_project_scans_uu_id_3457188d-d63d-4bd1-add8-dac59f3a2ec0.appmap.json (2024-05-23 17:40:07; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716478809_390962_http_localhost_8000_report-upload_upload_.appmap.json (2024-05-23 17:40:09; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716478830_756437_http_localhost_8000_report-upload_upload_.appmap.json (2024-05-23 17:40:30; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716478830_965233_http_localhost_8000_staticscanners_list_scans_.appmap.json (2024-05-23 17:40:30; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716478833_254889_http_localhost_8000_projects_.appmap.json (2024-05-23 17:40:33; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716478837_499459_http_localhost_8000_staticscanners_list_scans_.appmap.json (2024-05-23 17:40:37; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716478840_556907_http_localhost_8000_projects_.appmap.json (2024-05-23 17:40:40; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716478844_188672_http_localhost_8000_projects_project_delete_.appmap.json (2024-05-23 17:40:44; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716478844_229438_http_localhost_8000_projects_.appmap.json (2024-05-23 17:40:44; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716478846_002618_http_localhost_8000_groups_.appmap.json (2024-05-23 17:40:46; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716478849_006336_http_localhost_8000_staticscanners_list_scans_.appmap.json (2024-05-23 17:40:49; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716478851_927492_http_localhost_8000_webscanners_list_scans_.appmap.json (2024-05-23 17:40:51; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716478853_221018_http_localhost_8000_networkscanners_list_scans_.appmap.json (2024-05-23 17:40:53; recording.py:78)
+INFO:_appmap.recording: writing /root/PycharmProjects/tmp/appmap/requests/1716478854_485849_http_localhost_8000_cloudscanners_list_scans_.appmap.json (2024-05-23 17:40:54; recording.py:78)
+INFO:_appmap.web_framework: Requests will be recorded (Django) (2024-05-25 14:09:58; web_framework.py:162)
+WARNING:django.request: Not Found: /dashboard/ff (2024-05-27 10:45:07; log.py:224)
+WARNING:django.request: Not Found: /favicon.ico (2024-05-27 10:45:07; log.py:224)
+ERROR:django.request: Internal Server Error: /report-upload/upload/ (2024-05-27 10:45:20; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 76, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/report_upload/views.py", line 81, in post
+    file = request.FILES["file"]
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 78, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'file'
+ERROR:django.request: Internal Server Error: /zapscanner/run-plan/ (2024-05-27 12:58:05; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/webscanners/zapscanner/views.py", line 695, in af_run
+    zap_af(request, checked_plans, project_id, scan_id)
+  File "/root/PycharmProjects/archery/webscanners/zapscanner/views.py", line 722, in zap_af
+    raise PlanRunFailed("Can't Run this plan : Re Upload the plan")
+webscanners.zapscanner.views.PlanRunFailed: Can't Run this plan : Re Upload the plan
+ERROR:django.request: Internal Server Error: /zapscanner/run-plan/ (2024-05-27 13:01:12; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/webscanners/zapscanner/views.py", line 695, in af_run
+    zap_af(request, checked_plans, project_id, scan_id)
+  File "/root/PycharmProjects/archery/webscanners/zapscanner/views.py", line 722, in zap_af
+    raise PlanRunFailed("Plan NOT FOUND in ZAP server  : Re Upload the plan")
+webscanners.zapscanner.views.PlanRunFailed: Plan NOT FOUND in ZAP server  : Re Upload the plan
+WARNING:django.request: Forbidden: /api/v1/uploadscan/ (2024-05-28 10:59:59; log.py:224)
+WARNING:django.request: Forbidden: /api/v1/group-create/ (2024-05-28 11:00:26; log.py:224)
+ERROR:django.request: Internal Server Error: /api/v1/group-create/ (2024-05-28 11:03:48; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/archeryapi/views.py", line 184, in post
+    request.user= UserProfile.objects.get(name="cli")
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/query.py", line 435, in get
+    raise self.model.DoesNotExist(
+user_management.models.UserProfile.DoesNotExist: UserProfile matching query does not exist.
+ERROR:django.request: Internal Server Error: /api/v1/group-create/ (2024-05-28 11:04:03; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/archeryapi/views.py", line 184, in post
+    request.user= UserProfile.objects.get(name="cli")
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/query.py", line 435, in get
+    raise self.model.DoesNotExist(
+user_management.models.UserProfile.DoesNotExist: UserProfile matching query does not exist.
+ERROR:django.request: Internal Server Error: /api/v1/group-create/ (2024-05-28 11:05:27; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/archeryapi/views.py", line 184, in post
+    request.user= UserProfile.objects.get(name="cli")
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/query.py", line 435, in get
+    raise self.model.DoesNotExist(
+user_management.models.UserProfile.DoesNotExist: UserProfile matching query does not exist.
+ERROR:django.request: Internal Server Error: /api/v1/group-create/ (2024-05-28 11:05:43; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/archeryapi/views.py", line 184, in post
+    request.user= UserProfile.objects.get(name="cli")
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/query.py", line 435, in get
+    raise self.model.DoesNotExist(
+user_management.models.UserProfile.DoesNotExist: UserProfile matching query does not exist.
+ERROR:django.request: Internal Server Error: /api/v1/group-create/ (2024-05-28 11:10:22; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/archeryapi/views.py", line 184, in post
+    request.user= UserProfile.objects.get(name="cli")
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/query.py", line 435, in get
+    raise self.model.DoesNotExist(
+user_management.models.UserProfile.DoesNotExist: UserProfile matching query does not exist.
+WARNING:django.request: Forbidden: /api/v1/project-create/ (2024-05-28 11:13:05; log.py:224)
+WARNING:django.request: Forbidden: /api/v1/group-create/ (2024-05-28 11:13:23; log.py:224)
+WARNING:django.request: Forbidden: /api/v1/project-create/ (2024-05-28 11:13:37; log.py:224)
+ERROR:django.request: Internal Server Error: /api/v1/uploadscan/ (2024-05-28 11:16:13; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/archeryapi/views.py", line 421, in post
+    scanner=db_name,
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/base.py", line 503, in __init__
+    raise TypeError("%s() got an unexpected keyword argument '%s'" % (cls.__name__, kwarg))
+TypeError: WebScansDb() got an unexpected keyword argument 'target'
+ERROR:django.request: Internal Server Error: /api/v1/uploadscan/ (2024-05-28 11:17:13; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/archeryapi/views.py", line 421, in post
+    scanner=db_name,
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/base.py", line 503, in __init__
+    raise TypeError("%s() got an unexpected keyword argument '%s'" % (cls.__name__, kwarg))
+TypeError: WebScansDb() got an unexpected keyword argument 'target'
+ERROR:django.request: Internal Server Error: /api/v1/uploadscan/ (2024-05-28 11:25:32; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/archeryapi/views.py", line 422, in post
+    scan_dump = WebScansDb(
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/base.py", line 503, in __init__
+    raise TypeError("%s() got an unexpected keyword argument '%s'" % (cls.__name__, kwarg))
+TypeError: WebScansDb() got an unexpected keyword argument 'target'
+WARNING:django.request: Forbidden: /api/v1/project-create/ (2024-05-28 11:52:47; log.py:224)
+ERROR:django.request: Internal Server Error: /api/v1/uploadscan/ (2024-05-28 12:58:01; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/archeryapi/views.py", line 437, in post
+    project_id=project_id,
+UnboundLocalError: local variable 'project_id' referenced before assignment
+ERROR:django.request: Internal Server Error: /api/v1/uploadscan/ (2024-05-28 12:58:32; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/archeryapi/views.py", line 437, in post
+    project_id=project_id,
+UnboundLocalError: local variable 'project_id' referenced before assignment
+ERROR:django.request: Internal Server Error: /api/v1/uploadscan/ (2024-05-28 13:00:41; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/archeryapi/views.py", line 347, in post
+    if project_uu_id is not None :
+UnboundLocalError: local variable 'project_uu_id' referenced before assignment
+ERROR:django.request: Internal Server Error: /api/v1/uploadscan/ (2024-05-28 13:01:57; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/archeryapi/views.py", line 347, in post
+    if project_uu_id is not None :
+UnboundLocalError: local variable 'project_uu_id' referenced before assignment
+WARNING:django.request: Forbidden: /api/v1/group-create/ (2024-05-28 13:06:07; log.py:224)
+WARNING:django.request: Not Found: /static/matrix-admin-bt4/assets/libs/bootstrap/dist/js/bootstrap.min.js.map (2024-05-28 13:09:22; log.py:224)
+WARNING:django.request: Not Found: /static/matrix-admin-bt4/assets/libs/popper.js/dist/umd/popper.min.js.map (2024-05-28 13:09:22; log.py:224)
+WARNING:django.request: Not Found: /static/js/bootstrap-select.min.js.map (2024-05-28 13:09:22; log.py:224)
+WARNING:django.request: Not Found: /static/matrix-admin-bt4/dist/css/icons/material-design-iconic-font/css/materialdesignicons.min.css.map (2024-05-28 13:09:22; log.py:224)
+WARNING:django.request: Bad Request: /api/v1/zap-scan/ (2024-05-28 13:16:08; log.py:224)
+WARNING:django.request: Bad Request: /api/v1/zap-scan/ (2024-05-28 13:19:17; log.py:224)
+WARNING:django.request: Bad Request: /api/v1/zap-scan/ (2024-05-28 13:20:44; log.py:224)
+WARNING:django.request: Bad Request: /api/v1/zap-scan/ (2024-05-28 13:22:16; log.py:224)
+WARNING:django.request: Bad Request: /api/v1/zap-scan/ (2024-05-28 13:22:38; log.py:224)
+WARNING:django.request: Bad Request: /api/v1/zap-scan/ (2024-05-28 13:22:53; log.py:224)
+WARNING:django.request: Bad Request: /api/v1/zap-scan/ (2024-05-28 13:26:17; log.py:224)
+WARNING:django.request: Bad Request: /api/v1/zap-scan/ (2024-05-28 13:26:31; log.py:224)
+WARNING:django.request: Bad Request: /api/v1/zap-scan/ (2024-05-28 13:26:53; log.py:224)
+ERROR:django.request: Internal Server Error: /api/v1/zap-scan/ (2024-05-28 13:31:51; log.py:224)
+Traceback (most recent call last):
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/root/PycharmProjects/archery/archeryapi/views.py", line 632, in post
+    ProjectDb.objects.filter(project_name=project_name).values("uu_id").get()["uu_id"]
+  File "/root/PycharmProjects/archery/venv/lib/python3.10/site-packages/django/db/models/query.py", line 435, in get
+    raise self.model.DoesNotExist(
+projects.models.ProjectDb.DoesNotExist: ProjectDb matching query does not exist.

@@ -1,0 +1,120 @@
+<div class="" style="padding: 3px 1px 2px 3px;">
+    <h6 class="card-title card-header ">Full Scan Configuration</h6>
+</div>
+<div class="card-body">
+    <form id="fullScanForm ">
+        <!-- Target URLs -->
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label text-sm-center " for="targetUrls">Target URLs:</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" id="targetUrls" name="targetUrls" rows="1"></textarea>
+            </div>
+        </div>
+        <!-- Include and Exclude Regex -->
+        <div class="form-row">
+            <div class="form-group col-md-6 row">
+                <label class="col-sm-4 col-form-label text-sm-center" for="includeRegex">Include:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="includeRegex" name="includeRegex">
+                </div>
+            </div>
+            <div class="form-group col-md-6 row">
+                <label class="col-sm-2 col-form-label text-sm-right" for="excludeRegex">Exclude:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="excludeRegex" name="excludeRegex">
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <div style="margin-left: 60px">
+
+        <h4 class="text-start">Authentication</h4>
+
+        <div class="form-check checkbox inline checkbox-slider--b-flat checkbox-slider--b"
+             style="width: 200px; padding-left: 5px">
+            <label>
+                <input type="checkbox" class="form-check-input" id="auth">
+                <span>Authentication</span>
+            </label>
+{#            <i data-toggle="modal" data-target="#authPopUp" class="fas fa-cog"></i>#}
+        </div>
+
+        <br>
+
+        <h4 class="text-start">Exploring App</h4>
+        <div class="form">
+            <div class="form-check checkbox inline checkbox-slider--b-flat checkbox-slider--b" style="width: 200px;">
+                <label>
+                    <input type="checkbox" class="form-check-input" id="spider">
+                    <span>Spider</span>
+                </label>
+                <i data-toggle="modal" data-target="#spiderPopUp" class="fas fa-cog"></i>
+            </div>
+
+            <div class="form-check checkbox inline checkbox-slider--b-flat checkbox-slider--b" style="width: 200px;">
+                <label>
+                    <input type="checkbox" class="form-check-input" id="ajaxSpider">
+                    <span>Ajax Spider</span>
+                </label>
+                <i data-toggle="modal" data-target="#ajaxSpiderPopUp" data-whatever="@mdo" class="fas fa-cog"></i>
+            </div>
+        </div>
+
+        <h4 class="text-start">Attacking App</h4>
+        <div class="form">
+            <div class="form-check checkbox inline checkbox-slider--b-flat checkbox-slider--b" style="width: 200px;">
+                <label>
+                    <input type="checkbox" class="form-check-input" id="passive">
+                    <span>Passive Scaning</span>
+                </label>
+{#                <i data-toggle="modal" data-target="#passivePopUp" data-whatever="@mdo" class="fas fa-cog"></i>#}
+            </div>
+            <div class="form-check checkbox inline checkbox-slider--b-flat checkbox-slider--b" style="width: 200px; ">
+                <label>
+                    <input type="checkbox" class="form-check-input" id="active">
+                    <span>Active Scanning</span>
+                </label>
+                <i data-toggle="modal" data-target="#activePopUp" data-whatever="@mdo" class="fas fa-cog"></i>
+            </div>
+        </div>
+
+        </div>
+
+    </form>
+</div>
+
+{% include 'webscanners/zapscanner/popups.html' %}
+
+
+<style>
+    .form-check i {
+        cursor: pointer;
+        padding-left: 7px;
+    }
+
+    .form div {
+        padding-left: 5px;
+    }
+
+
+</style>
+
+<script>
+        function getCheckedCheckboxes() {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        var checkedCheckboxes = [];
+
+        checkboxes.forEach(function(checkbox) {
+            if (checkbox.checked) {
+                checkedCheckboxes.push(checkbox.id);
+                console.log(checkbox.id)
+            }
+        });
+        return checkedCheckboxes;
+    }
+
+    // Example usage
+
+
+</script>

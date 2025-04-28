@@ -1,0 +1,67 @@
+<div class="" style="padding: 3px 1px 2px 3px;">
+    <h6 class="card-title card-header">Load and Run Script</h6>
+</div>
+<div class="card-body">
+    <form id="scriptForm" enctype="multipart/form-data">
+        <div class=" row ">
+            <div class="col-sm">
+                <div class="form-group ">
+                    <label for="contextName">Context Name:</label>
+                    <input type="text" class="form-control" id="contextName" name="contextName" required>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="form-group">
+                    <label for="targetName">Target Url :</label>
+                    <input type="text" class="form-control" id="targetName" name="targetName" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="scriptName">Script Name:</label>
+            <input type="text" class="form-control" id="scriptName" name="scriptName" required>
+        </div>
+
+        <div class=" row ">
+            <div class="form-group col-sm">
+                <label for="scriptAction">Action :</label>
+                <select class="form-control" id="scriptAction" name="scriptAction" required>
+                    <option value="add">add</option>
+                    <option value="enable">enable</option>
+                    <option value="disable">disable</option>
+                    <option value="run">run</option>
+                    <option value="remove">remove</option>
+                </select>
+            </div>
+            <div class="form-group col-sm">
+                <label for="scriptEngine">Script Engine:</label>
+                <select class="form-control" id="scriptEngine" name="scriptEngine" required>
+                    <option value="JavaScript">ECMAScript: Graal.js</option>
+                    <option value="Python">Zest: Mozilla Zest</option>
+                </select>
+            </div>
+            <div class="form-group col-sm">
+                <label for="scriptType">Script Type:</label>
+                <select class="form-control" id="scriptType" name="scriptType" required>
+                    <option value="selenium">selenium</option>
+                    <option value="authentication">authentication</option>
+                    <option value="active">active</option>
+                    <option value="selenium">passive</option>
+                    <option value="standalone">StandAlone</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="fileUpload">Upload Script File:</label>
+            <input type="file" class="form-control" id="fileUpload" name="fileUpload" required>
+        </div>
+        <div class="form-group">
+            <label for="scriptDescription">Script Description:</label>
+            <textarea class="form-control" id="scriptDescription" name="scriptDescription"
+                      rows="3"></textarea>
+        </div>
+    </form>
+</div>

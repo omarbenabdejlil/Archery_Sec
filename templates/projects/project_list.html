@@ -1,0 +1,123 @@
+{% extends 'base/site_base.html' %}
+
+{% block body %}
+{#        <div style=" width: 1190px; height: 37px; background: #F5F5F5; box-shadow: #171a1f;">#}
+{#            <div id="breadcrumb" >#}
+{#                <a href="/dashboard/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home > </a>#}
+{#                <a href="" class="current"> Projects List</a>#}
+{#            </div>#}
+{#        </div>#}
+        <div style="background-color: #F5F5F5; padding: 5px 5px; border: none; color: #000; text-align: left;">
+            <!-- Breadcrumb links here -->
+            <a href="/dashboard/" title="Go to Home" style="color: #000; text-decoration: none; ">Home</a>
+            <span style="color: #000;"> > </span>
+            <a href="/projects/" class="current" style="font-weight: bold;">Projects List</a>
+        </div>
+    <br>
+
+        <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="float-right">
+                                    {% if user.is_superuser == True or user.role.id == 2 %}
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a href="{% url 'report_upload:upload' %}" class="btn btn-primary btn-mini" data-toggle="tooltip" data-placement="top" title="Upload XML Report"><i
+                                                class="fas fa-upload"></i> Upload </a>
+                                    </div>
+                                    {% endif %}
+                                    {% if user.is_superuser == True %}
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="{% url 'projects:project_create' %}" class="btn btn-primary btn-mini" data-toggle="tooltip" data-placement="top" title="Create New Project"><i
+                                            class="fas fa-plus-circle"></i> Add Project</a>
+                                        </div>
+                                        {% endif %}
+                                </div>
+    
+                                <div class="d-md-flex align-items-center">
+                                    <div>
+                                        <h1>Project List</h1>
+                                        <h5 class="card-subtitle"></h5>
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <div class="row">
+                                    <!-- column -->
+    
+                                    <div class="table-responsive">
+                                        <table id="data_table" class="table table-bordered data-table">
+                                            <thead>
+                                            <tr>
+                                                <th>Project</th>
+{#                                                <th>Group</th>#}
+                                                <th>Created By</th>
+                                                <th>Total</th>
+                                                <th>Critical</th>
+                                                <th>High</th>
+                                                <th>Medium</th>
+                                                <th>Low</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>{% for data in all_project %}
+                                                <tr data-target="#">
+                                                    <td>
+                                                        <a href="{% url 'groups:groups_list' %}?name={{ data.group.group_name }}"
+                                                           style="color: #545454; font-weight: bold;"
+                                                        > {{ data.group.group_name }}</a>
+                                                        
+                                                        <span style="color: #000;"> / </span>
+                                                        
+                                                        <a href="{% url 'projects:project_overview' %}?uu_id={{ data.uu_id }}"
+                                                           style="font-weight: bold;"
+
+                                                        > {{ data.project_name }}</a>
+
+                                                    </td>
+                                                    <td>{{ data.created_by.name }}</td>
+                                                    <td><span
+                                                            class="badge badge-pill badge-purple">{{ data.total_vuln }}</span>
+                                                    </td>
+    
+                                                    <td><span
+                                                            class="badge badge-pill badge-critical">{{ data.total_critical }}</span>
+                                                    </td>
+                                                    <td> <span
+                                                            class="badge badge-pill badge-danger">{{ data.total_high }}</span>
+                                                    </td>
+                                                    <td> <span
+                                                            class="badge badge-pill badge-warning">{{ data.total_medium }}</span>
+                                                    </td>
+                                                    <td> <span
+                                                            class="badge badge-pill badge-info">{{ data.total_low }}</span>
+                                                    </td>
+    
+    
+                                                    <td class="confirm-delete">
+                                                        <form action="{% url 'projects:project_delete' %}" method="POST">
+                                                            <input type="hidden" name="project_id"
+                                                                   value="{{ data.uu_id }}"/>
+                                                            {% csrf_token %}
+                                                            <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete Project"><i
+                                                                    class="m-r-0 mdi mdi-delete"></i></button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    <script type="text/javascript">
+
+        $(document).on('click', '.confirm-delete', function () {
+            return confirm('Are you sure you want to delete this?');
+        })
+
+    </script>
+{% endblock  %}

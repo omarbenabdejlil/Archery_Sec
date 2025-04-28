@@ -1,0 +1,201 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'logo.png' %}">
+    <title>ArcherySec</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-3.4.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script>
+    <link href="{% static 'matrix-admin-bt4/assets/libs/toastr/build/toastr.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/css/multi-select-tag.css">
+    <link href="{% static 'matrix-admin-bt4/dist/css/style.min.css' %}" rel="stylesheet">
+    <link href="{% static 'matrix-admin-bt4/dist/css/slider.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'matrix-admin-bt4/assets/libs/select2/dist/css/select2.min.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'css/bootstrap-select.min.css' %}">
+    <script src="{% static 'js/bootstrap-select.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'matrix-admin-bt4/assets/extra-libs/multicheck/multicheck.css' %}">
+    <link href="{% static 'matrix-admin-bt4/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4-custom.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'matrix-admin-bt4/assets/extra-libs/DataTables/Buttons-2.3.6/css/buttons.bootstrap4.min.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'matrix-admin-bt4/assets/extra-libs/DataTables/SearchBuilder-1.4.2/css/searchBuilder.bootstrap4.min.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'matrix-admin-bt4/assets/extra-libs/DataTables/DateTime-1.4.0/css/dataTables.dateTime.min.css' %}"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'matrix-admin-bt4/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}">
+</head>
+
+<body>
+<div class="preloader">
+    <div class="lds-ripple">
+        <div class="lds-pos"></div>
+        <div class="lds-pos"></div>
+    </div>
+</div>
+<div id="main-wrapper">
+    {% include 'base/head.html' %}
+    {% include 'base/aside.html' %}
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            {% block body %}
+            {% endblock %}
+        </div>
+        <footer class="footer text-center">
+            All Rights Reserved : Developed by Ahmed Aissa.<br>
+            <a> Version v3.0 </a>
+        </footer>
+
+    </div>
+</div>
+
+
+<script src="{% static 'matrix-admin-bt4/assets/libs/popper.js/dist/umd/popper.min.js' %}"></script>
+<script src="{% static 'matrix-admin-bt4/assets/libs/toastr/build/toastr.min.js' %}"></script>
+<script src="{% static 'matrix-admin-bt4/assets/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'matrix-admin-bt4/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js' %}"></script>
+<script src="{% static 'matrix-admin-bt4/assets/extra-libs/sparkline/sparkline.js' %}"></script>
+<script src="{% static 'matrix-admin-bt4/dist/js/waves.js' %}"></script>
+<script src="{% static 'matrix-admin-bt4/dist/js/sidebarmenu.js' %}"></script>
+<script src="{% static 'matrix-admin-bt4/dist/js/custom.min.js' %}"></script>
+<script src="{% static 'matrix-admin-bt4/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
+<script src="{% static 'matrix-admin-bt4/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
+<script src="{% static 'matrix-admin-bt4/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
+<script src="{% static 'matrix-admin-bt4/assets/libs/select2/dist/js/select2.full.min.js' %}"></script>
+<script src="{% static 'matrix-admin-bt4/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+<script src="{% static 'matrix-admin-bt4/dist/js/clipboard.min.js' %}"></script>
+<script src="{% static 'matrix-admin-bt4/dist/js/highlight.min.js' %}"></script>
+<script>hljs.highlightAll();</script>
+
+
+<script>
+    /****************************************
+     *       Basic Table                   *
+     ****************************************/
+    let data_table = $('#data_table').DataTable({
+        language: {
+            searchBuilder: {
+                add: 'Add Filter',
+                title: {
+                0: 'Filters',
+            },
+            }
+        },
+        lengthMenu: [[4, 8, 15, -1], [4, 8, 15, "All"]],
+    });
+
+    new $.fn.dataTable.SearchBuilder(data_table, {});
+    data_table.searchBuilder.container().prependTo(data_table.table().container());
+
+    $(".select2").select2();
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+
+    // To style all selects
+    $('select').selectpicker();
+
+
+    let data_table_static = $('#data_table_static').DataTable({
+        language: {
+            searchBuilder: {
+                add: 'Add Filter',
+                title: {
+                0: 'Filters',
+            },
+            }
+        },
+        lengthMenu: [[4, 8, 15, -1], [4, 8, 15, "All"]],
+    });
+    new $.fn.dataTable.SearchBuilder(data_table_static, {});
+    data_table_static.searchBuilder.container().prependTo(data_table_static.table().container());
+
+
+    let data_table_schedule = $('#data_table_schedule').DataTable({
+        language: {
+            searchBuilder: {
+                add: 'Add Filter',
+                title: {
+                0: 'Filters',
+            },
+            }
+        },
+        lengthMenu: [[5, 10, 15, -1], [5, 10, 15, "All"]],
+    });
+    new $.fn.dataTable.SearchBuilder(data_table_schedule, {});
+    data_table_schedule.searchBuilder.container().prependTo(data_table_schedule.table().container());
+
+
+     let data_table_compliance = $('#data_table_compliance').DataTable({
+         language: {
+            searchBuilder: {
+                add: 'Add Filter',
+                title: {
+                0: 'Filters',
+            },
+            }
+        },
+        lengthMenu: [[5, 10, 15, -1], [5, 10, 15, "All"]],
+    });
+    new $.fn.dataTable.SearchBuilder(data_table_compliance, {});
+    data_table_compliance.searchBuilder.container().prependTo(data_table_compliance.table().container());
+
+    let data_table_cloud = $('#data_table_cloud').DataTable({
+        language: {
+            searchBuilder: {
+                add: 'Add Filter',
+                title: {
+                0: 'Filters',
+            },
+            }
+        },
+        lengthMenu: [[5, 10, 15, -1], [5, 10, 15, "All"]],
+    });
+    new $.fn.dataTable.SearchBuilder(data_table_cloud, {});
+    data_table_cloud.searchBuilder.container().prependTo(data_table_cloud.table().container());
+
+    let data_table_Infrastructure = $('#data_table_Infrastructure').DataTable({
+        language: {
+            searchBuilder: {
+                add: 'Add Filter',
+                title: {
+                0: 'Filters',
+            },
+            }
+
+        },
+        lengthMenu: [[5, 10, 15, -1], [5, 10, 15, "All"]],
+    });
+    new $.fn.dataTable.SearchBuilder(data_table_Infrastructure, {});
+    data_table_Infrastructure.searchBuilder.container().prependTo(data_table_Infrastructure.table().container());
+
+
+
+</script>
+<script>
+    $(window).load(function () {
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'alert-success' %}
+                    toastr.success('{{ message }}');
+                {% endif %}
+                {% if message.tags == 'alert-warning' %}
+                    toastr.warning('{{ message }}');
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    });
+</script>
+</body>
+</html>

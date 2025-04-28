@@ -1,0 +1,158 @@
+{% extends 'base/site_base.html' %}
+
+{% block body %}
+    <div  style="background-color: #F5F5F5; padding: 5px 5px; border: none; color: #000; text-align: left;">
+        <a href="/dashboard/" title="Go to Home" style="color: #000; text-decoration: none; ">Home</a>
+        <span style="color: #000;"> > </span>
+        <a href="/groups/" class="current" style="font-weight: bold;">Groups </a>
+    </div>
+    <br>
+
+    <div class="card">
+        <div class="col-md-12">
+            <div >
+                <div class="card-body">
+                    <div class="float-right">
+                        {% if user.is_superuser == True %}
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a href="{% url 'groups:group_create' %}" class="btn btn-primary btn-mini"
+                                   data-toggle="tooltip" data-placement="top" title="Create New Group"><i
+                                        class="fas fa-plus-circle"></i> Add Group</a>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-md-flex align-items-center">
+                        <div>
+                            <h1>Groups List</h1>
+                            <h5 class="card-subtitle"></h5>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <!-- column -->
+
+                        <div class="table-responsive">
+                            <table id="data_table" class="table table-bordered data-table">
+                                <thead>
+                                <tr>
+                                    <th>Group</th>
+                                    <th>Created By</th>
+                                    <th>Total Projects</th>
+                                    <th class="col-sm-1"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for group in groups %}
+                                    <tr data-target="#">
+                                        <td>
+                                            <a style="font-weight: bold;"
+                                               href="{% url 'groups:groups_list' %}?name={{ group.group_name }}"
+                                            >{{ group.group_name }}
+                                            </a>
+                                        </td>
+                                        <td>{{ group.created_by.name }}</td>
+                                        <td><span
+                                                class="badge badge-pill badge-purple">{{ group.total_projects }}</span>
+                                        </td>
+                                        <td >
+                                            {% if user.is_superuser == True %}
+                                                {% if group.group_name == "Standalone" %}
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary disabled "
+                                                    title="can't update">
+                                                        <i class="mdi mdi-dots-vertical"></i>
+                                                    </button>
+                                                {% else %}
+                                                    <button type="button" data-group-name="{{ group.group_name }}"
+                                                            data-group-description="{{ group.group_description }}"
+                                                            data-group-id="{{ group.uu_id }}"
+                                                            data-toggle="modal" data-target="#groupModal"
+                                                            class="btn btn-sm btn-outline-secondary group-action-btn"
+                                                            title="group del/update">
+                                                        <i class="mdi mdi-dots-vertical"></i>
+                                                    </button>
+
+{#                                                    <button type="button" data-toggle="modal" data-target="#groupModal"  class="btn btn-sm btn-outline-secondary "#}
+{#                                                    title="group del/update">#}
+{#                                                        <i  class="mdi mdi-dots-vertical"></i>#}
+{#                                                    </button>#}
+
+                                                {% endif %}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Update/Delete Group Modal -->
+<div class="modal fade" id="groupModal" tabindex="-1" role="dialog" aria-labelledby="groupModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form class="form-horizontal" method="POST" action="{% url 'groups:group_update' %}">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="groupModalLabel">Update/Delete Group</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="group_id" name="group_id">
+                    <div class="form-group">
+                        <label class="col-form-label" for="group_name">Group Name:</label>
+                        <input type="text" class="form-control" id="group_name" name="group_name" >
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" for="group_description">Group Description:</label>
+                        <input class="form-control" id="group_description" name="group_description" >
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="updateGroupBtn">Update</button>
+                </div>
+            </form>
+            <form action="{% url 'groups:group_delete' %}" method="POST" class="confirm-delete">
+                <input type="hidden" id="group_uuid" name="group_uuid">
+                {% csrf_token %}
+                <div class="modal-footer">
+                    <button  class="btn btn-danger" title="Delete Group">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+    <script type="text/javascript">
+        $(document).on('click', '.confirm-delete', function () {
+            return confirm('Are you sure you want to delete this?');
+        })
+
+    </script>
+
+   <script type="text/javascript">
+    $(document).ready(function () {
+        $('.group-action-btn').click(function () {
+            var groupName = $(this).data('group-name');
+            var groupDescription = $(this).data('group-description');
+            var groupId =  $(this).data('group-id');
+
+            $('#group_name').val(groupName);
+            $('#group_description').val(groupDescription);
+            $('#group_id').val(groupId);
+            $('#group_uuid').val(groupId);
+
+        });
+    });
+</script>
+
+
+{% endblock %}

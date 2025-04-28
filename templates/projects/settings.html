@@ -1,0 +1,109 @@
+{% extends 'projects/project_data.html' %}
+
+{% block content %}
+    <hr>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-md-flex align-items-center">
+                        <h1 class="card-title"> Settings </h1>
+                    </div>
+                    <br>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="col-md-12">
+                                <form class="form-horizontal" method="POST"
+                                      action="{% url 'projects:project_settings' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" id="project_uuid" name="project_uuid" value="{{ project_dat.uu_id }}">
+                                    <div class="form-group ">
+                                        <label>Name</label>
+                                        <input name="project_name" class="form-control" type="text" placeholder="Name" value="{{ project_dat.project_name }}">
+                                    </div>
+                                    <div class="form-group ">
+                                        <label>Project Description</label>
+                                        <input name="project_disc" class="form-control" type="text"
+                                               placeholder="Description"  value="{{ project_dat.project_disc }}">
+                                    </div>
+                                    <br>
+                                    <div class="d-md-flex align-items-center row" style="padding-bottom: 6px">
+                                        <h5 class="card-title">Meta Data</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-sm ">
+                                            <label>Group</label>
+                                            <div class="dtsb-criteria">
+                                                <select class="form-control dtsb-data dtsb-dropDown" name="group">
+                                                    {% for group in groups %}
+                                                        {% if group.uu_id == project_dat.group.uu_id %}
+                                                            <option value="{{ group.uu_id }}" selected>{{ group.group_name }}</option>
+                                                        {% else %}
+                                                            <option value="{{ group.uu_id }}" >{{ group.group_name }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm ">
+                                            <label>Priority</label>
+                                            <div class="dtsb-criteria">
+                                                <select class="form-control dtsb-data dtsb-dropDown" name="priority">
+                                                    {% for priority in priorities %}
+                                                        {% if priority == project_dat.priority %}
+                                                            <option value="{{ priority }}" selected>{{ priority | title }}</option>
+                                                        {% else %}
+                                                            <option value="{{ priority }}" >{{ priority | title }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-sm ">
+                                            <label>Technologies </label>
+                                            <div class="dtsb-criteria">
+                                                <select class=" dtsb-data dtsb-dropDown" name="technologies"
+                                                        id="technologies" multiple>
+                                                    <option value="1">Spring boot 2</option>
+                                                    <option value="1">Spring boot 3</option>
+                                                    <option value="2">Angular 9</option>
+                                                    <option value="2">Angular 10</option>
+                                                    <option value="2">Angular 17</option>
+                                                    <option value="2">Angular 16</option>
+                                                    <option value="3">Java 17</option>
+                                                    <option value="3">Java 21</option>
+                                                    <option value="5">Postgres</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-success">Save</button>
+                                    </div>
+                                </form>
+                                <hr>
+                                <br>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        new MultiSelectTag('technologies')  // id
+    </script>
+
+
+
+
+
+
+
+
+
+{% endblock %}

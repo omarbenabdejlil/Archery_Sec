@@ -1,0 +1,145 @@
+<div class="table-responsive ">
+    <table class="table table-bordered data-table" id="data_table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Project </th>
+            <th>Plan Title</th>
+            <th>Target</th>
+            <th>Description</th>
+            <th>Created By</th>
+            <th>Created At</th>
+{#            <th>context </th>#}
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for plan in af_plans %}
+            <tr>
+                <td>
+                    <form>
+                        <label class="customcheckbox">
+                            <input type="checkbox" class="listCheckbox"
+                                   value="{{ plan.uu_id }}"
+                                   name="plans_uu_id"
+                                   >
+                            <span class="checkmark"></span>
+                        </label>
+                    </form>
+                 </td>
+                <td>{{ plan.project_name }}</td>
+                <td>{{ plan.title }}</td>
+                <td>{{ plan.target }}</td>
+                <td>{{ plan.description }}</td>
+                <td>{{ plan.created_by.name }}</td>
+                <td>{{ plan.created_time }}</td>
+{#                <td>{{ plan.context }}</td>#}
+{#                <td>#}
+{#                    <form action="{% url 'zapscanner:delete_plan' %}" method="POST" class="confirm-delete">#}
+{#                        <input type="hidden" name="plan_id"#}
+{#                               value="{{ plan.uu_id }}"/>#}
+{#                        {% csrf_token %}#}
+{#                        <button class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Delete Plan">#}
+{#                            <i class="fas fa-trash"></i>#}
+{#                        </button>#}
+{##}
+{#                    </form>#}
+{#                </td>#}
+{#                <td>#}
+{#                    <form action="{% url 'zapscanner:run_plan' %}" method="POST">#}
+{#                        <input type="hidden" name="plan_id"#}
+{#                               value="{{ plan.uu_id }}"/>#}
+{#                        {% csrf_token %}#}
+{#                        <button class="btn btn-info" data-toggle="tooltip" data-placement="top" title="run Plan"><i#}
+{#                                class="far fa-paper-plane"></i></button>#}
+{#                    </form>#}
+{#                </td>#}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <div class="modal fade" id="afPlanPopUp" tabindex="-1" role="dialog" aria-labelledby="afPlanPopUp"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content ">
+                <div class="modal-header card-header">
+                    <h5 class="modal-title " id="exampleModalLabel">AF plan Upload</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="savePlanForm" action="{% url 'zapscanner:save_plan' %}" method="POST"
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group  ">
+                            <label for="planDescription">Project :</label>
+
+                            <div class=" dtsb-criteria">
+                                <select id="project_uuid" name="project_uuid"
+                                        class=" form-control dtsb-data dtsb-dropDown"
+                                        style="width: 100%; height:36px;">
+                                    <option selected>-------</option>
+                                    {% for data in projects %}
+                                        <option value="{{ data.uu_id }}">{{ data.project_name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="planTitle"> Plan Title:</label>
+                            <input type="text" class="form-control" id="planTitle" name="planTitle"
+                                   placeholder="Enter plan Title" required>
+
+                        </div>
+                       <div class="form-group">
+                            <label for="planTitle"> Target URL:</label>
+                            <input type="text" class="form-control" id="targetUrl" name="targetUrl"
+                                   placeholder="target .. " required>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="planDescription">Description</label>
+                            <textarea class="form-control" id="planDescription" name="planDescription" rows="3"
+                                      placeholder="describe the plan here"></textarea>
+                        </div>
+
+                        <div>
+                            <h6>Upload File </h6>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="fileUpload">Locally :</label>
+                            <input type="file" class="form-control" id="savePlanBtn" name="fileUpload" >
+                        </div>
+                        <div class="form-group  ">
+                            <label class="form-label" for="gitlabUpload"> Using Gitlab  :</label>
+                            <div class="row" >
+                                <input type="text" class="form-control col-md-4 " id="gitlabRepo" name="gitlabRepo"
+                                   placeholder="Gitlab Repository" >
+                                <input type="text" class="form-control col-md-2" id="gitlabBranch" name="gitlabBranch"
+                                   placeholder="Branch">
+
+                                <input type="text" class="form-control col-md-6" id="gitlabFileName" name="gitlabFileName"
+                                   placeholder="file name ">
+                            </div>
+
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

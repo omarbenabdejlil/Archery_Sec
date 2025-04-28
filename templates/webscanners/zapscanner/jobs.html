@@ -1,0 +1,146 @@
+<div class="" style="padding: 3px 1px 2px 3px;">
+    <h6 class="card-title card-header">Select your Job(s) from the ones available: </h6>
+</div>
+<div class="card-body custom-control ">
+    <div class="form-check checkbox inline checkbox-slider--b-flat checkbox-slider--b" style="width: 200px;">
+        <label>
+            <input type="checkbox" class="form-check-input" id="environment">
+            <span>environment</span>
+        </label>
+        <i data-toggle="modal" data-target="#contextPopUp" class="fas fa-cog"></i>
+        <i class="fa fa-question" aria-hidden="true"></i>
+
+    </div>
+    <div class="form-check checkbox inline checkbox-slider--b-flat checkbox-slider--b" style="width: 200px;">
+        <label>
+            <input type="checkbox" class="form-check-input" id="requestor">
+            <span>Requestor</span>
+        </label>
+        <i data-toggle="modal" data-target="#exampleModal" class="fas fa-cog"></i>
+        <i class="fa fa-question" aria-hidden="true"></i>
+
+    </div>
+
+    <div class="form-check checkbox inline checkbox-slider--b-flat checkbox-slider--b" style="width: 200px;">
+        <label>
+            <input type="checkbox" class="form-check-input" id="Spider">
+            <span>Spider</span>
+        </label>
+        <i data-toggle="modal" data-target="#spiderPopUp" class="fas fa-cog"></i>
+        <i class="fa fa-question" aria-hidden="true"></i>
+
+    </div>
+
+    <div class="form-check checkbox inline checkbox-slider--b-flat checkbox-slider--b" style="width: 200px;">
+        <label>
+            <input type="checkbox" class="form-check-input" id="ajaxSpider">
+            <span>Ajax Spider</span>
+        </label>
+        <i data-toggle="modal" data-target="#ajaxSpiderPopUp" data-whatever="@mdo" class="fas fa-cog"></i>
+        <i class="fa fa-question" aria-hidden="true"></i>
+
+    </div>
+
+    <div class="form-check checkbox inline checkbox-slider--b-flat checkbox-slider--b" style="width: 200px;">
+        <label>
+            <input type="checkbox" class="form-check-input" id="graphql">
+            <span>GraphQL</span>
+        </label>
+        <i data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" class="fas fa-cog"></i>
+
+        <i class="fa fa-question" aria-hidden="true"></i>
+
+    </div>
+
+    <div class="form-check checkbox inline checkbox-slider--b-flat checkbox-slider--b" style="width: 200px;">
+        <label>
+            <input type="checkbox" class="form-check-input" id="passive">
+            <span>Passive</span>
+        </label>
+        <i data-toggle="modal" data-target="#passivePopUp" data-whatever="@mdo" class="fas fa-cog"></i>
+        <i class="fa fa-question" aria-hidden="true"></i>
+
+    </div>
+
+    <div class="form-check checkbox inline checkbox-slider--b-flat checkbox-slider--b" style="width: 200px;">
+        <label>
+            <input type="checkbox" class="form-check-input" id="active">
+            <span>Active</span>
+        </label>
+        <i data-toggle="modal" data-target="#activePopUp" data-whatever="@mdo" class="fas fa-cog"></i>
+        <i class="fa fa-question" aria-hidden="true"></i>
+
+    </div>
+
+    <div class="form-check checkbox inline checkbox-slider--b-flat checkbox-slider--b" style="width: 200px;">
+        <label>
+            <input type="checkbox" class="form-check-input" id="report">
+            <span>Report</span>
+        </label>
+        <i data-toggle="modal" data-target="#ReportModal" class="fas fa-cog"></i>
+        <i class="fa fa-question" aria-hidden="true"></i>
+
+    </div>
+</div>
+
+{#   <!-- this section is for pop up of context configuration -->#}
+{#    <div class="modal fade" id="contextPopUp" tabindex="-1" role="dialog" aria-labelledby="contextPopUp"#}
+{#         aria-hidden="true">#}
+{#        <div class="modal-dialog" role="document">#}
+{#            <div class="modal-content ">#}
+{#                <div class="modal-header card-header">#}
+{#                    <h5 class="modal-title " id="exampleModalLabel">Context Configuration</h5>#}
+{#                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#                        <span aria-hidden="true">&times;</span>#}
+{#                    </button>#}
+{#                </div>#}
+{#                <div class="modal-body">#}
+{#                    <form>#}
+{#                        <div class="form-group">#}
+{#                            <label for="contextName">Name:</label>#}
+{#                            <input type="text" class="form-control" id="contextName" placeholder="Enter Context Name">#}
+{#                        </div>#}
+{#                        <div class="form-group">#}
+{#                            <label for="contextURLs">URLs:</label>#}
+{#                            <textarea class="form-control" id="contextURLs" rows="3"#}
+{#                                      placeholder="Enter URLs"></textarea>#}
+{#                        </div>#}
+{#                        <div class="form-group">#}
+{#                            <label for="includeRegex">Include Regex:</label>#}
+{#                            <input type="text" class="form-control" id="includeRegex" placeholder="Enter Include Regex">#}
+{#                        </div>#}
+{#                        <div class="form-group">#}
+{#                            <label for="excludeRegex">Exclude Regex:</label>#}
+{#                            <input type="text" class="form-control" id="excludeRegex" placeholder="Enter Exclude Regex">#}
+{#                        </div>#}
+{#                        <div class="form-group dtsb-criteria">#}
+{#                            <label for="technologiesDropdown">Technologies:</label>#}
+{#                            <select class=" form-control dtsb-data dtsb-dropDown "#}
+{#                                    style="width: 100%; height:36px;"#}
+{#                                    id="technologiesDropdown">#}
+{#                                <option value="sql">SQL</option>#}
+{#                                <option value="postgres">Postgres</option>#}
+{#                                <option value="java">Java</option>#}
+{#                                <option value="python">Python</option>#}
+{#                            </select>#}
+{#                        </div>#}
+{#                    </form>#}
+{##}
+{#                </div>#}
+{#                <div class="modal-footer">#}
+{#                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>#}
+{#                    <button type="button" class="btn btn-primary">Save</button>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{# #}
+
+{#        Ajax Spider pop up#}
+
+
+<style>
+    .form-check i {
+        cursor: pointer;
+    }
+</style>

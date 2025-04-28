@@ -1,0 +1,186 @@
+# env:
+#   contexts:
+#   - name: "juiceShop"
+#     urls:
+#     - "http://localhost:3003"
+#     includePaths:
+#     - "http://localhost:3003/.*"
+#     excludePaths: []
+#     # authentication:
+#     #   method: "form"
+#     #   parameters:
+#     #     loginPageUrl: "http://localhost:3003/#/login"
+#     #     loginRequestUrl: ""
+#     #     loginRequestBody: "email={%email%}&password={%password%}"
+#     #   verification:
+#     #     method: "response"
+#     #     loggedInRegex: "\\QUser: <a href=\"password.jsp\">\\E"
+#     #     loggedOutRegex: "\\QGuest user\\E"
+#     #     pollFrequency: 60
+#     #     pollUnits: "requests"
+#     #     pollUrl: ""
+#     #     pollPostData: ""
+#     # sessionManagement:
+#     #   method: "cookie"
+#     #   parameters: {}
+#     # technology:
+#     #   exclude: []
+#     # users:
+#     # - name: "test"
+#     #   credentials:
+#     #     password: "a" # password
+#     #     email: "admin' or '1'=='1'--" # username 
+#   parameters:
+#     failOnError: false
+#     failOnWarning: false
+#     progressToStdout: true
+#   vars: {}
+
+# jobs:
+# - parameters:
+#     scanOnlyInScope: true
+#     enableTags: false
+#     disableAllRules: false
+#   rules: []
+#   name: "passiveScan-config"
+#   type: "passiveScan-config"
+# - parameters: {}
+#   name: "spider"
+#   type: "spider"
+#   tests:
+#   - onFail: "INFO"
+#     statistic: "automation.spider.urls.added"
+#     site: ""
+#     operator: ">="
+#     value: 10
+#     name: "At least 10 URLs found"
+#     type: "stats"
+
+# - parameters:
+#     context: "juiceShop"
+#     user: ""
+#     url: "http://localhost:3003/"
+#     maxDuration: 5
+#     maxCrawlDepth: 10
+#     numberOfBrowsers: 16
+#     browserId: "firefox-headless" # 
+#     maxCrawlStates: 0
+#     eventWait: 1000
+#     reloadWait: 1000
+#     clickDefaultElems: true
+#     clickElemsOnce: true
+#     randomInputs: true
+#     inScopeOnly: true
+#     runOnlyIfModern: false
+#   name: "spiderAjax"
+#   type: "spiderAjax"
+#   tests:
+#   - onFail: "INFO"
+#     statistic: "spiderAjax.urls.added"
+#     site: ""
+#     operator: ">="
+#     value: 100
+#     name: "At least 100 URLs found"
+#     type: "stats"
+# - parameters: {}
+#   name: "passiveScan-wait"
+#   type: "passiveScan-wait"
+# - parameters:
+#     context: ""
+#     user: ""
+#     policy: ""
+#     maxRuleDurationInMins: 0
+#     maxScanDurationInMins: 0
+#     addQueryParam: false
+#     delayInMs: 0
+#     handleAntiCSRFTokens: false
+#     injectPluginIdInHeader: false
+#     scanHeadersAllRequests: false
+#     threadPerHost: 0
+#   policyDefinition:
+#     defaultStrength: "low"
+#     defaultThreshold: "off"
+#     rules:
+
+#   name: "activeScan"
+#   type: "activeScan"
+# - parameters:
+#     template: "risk-confidence-html"
+#     theme: "original"
+#     reportDir: "/zap/wrk/"
+#     reportFile: "testreport"
+#     reportTitle: "testreport"
+#     reportDescription: ""
+#     displayReport: true
+#   risks:
+#   - "info"
+#   - "low"
+#   - "medium"
+#   - "high"
+#   confidences:
+#   - "falsepositive"
+#   - "low"
+#   - "medium"
+#   - "high"
+#   - "confirmed"
+#   sections:
+#   - "siteRiskCounts"
+#   - "responseBody"
+#   - "appendix"
+#   - "alertTypes"
+#   - "responseHeader"
+#   - "alertTypeCounts"
+#   - "riskConfidenceCounts"
+#   - "alerts"
+#   - "aboutThisReport"
+#   - "contents"
+#   - "requestBody"
+#   - "reportDescription"
+#   - "reportParameters"
+#   - "requestHeader"
+#   - "summaries"
+#   name: "report"
+#   type: "report"
+
+---
+env:
+  contexts:
+  - name: "simple-json"
+    urls:
+    - "http://juice-shop.herokuapp.com/"
+    includePaths:
+    - "http://juice-shop.herokuapp.com/.*"
+    excludePaths: []
+    authentication:
+      method: "browser"
+      parameters:
+        loginPageUrl: "https://juice-shop.herokuapp.com/#/login"
+        loginPageWait: 2
+        browserId: "firefox-headless"
+      verification:
+        method: "poll"
+    sessionManagement:
+      method: "autodetect"
+      parameters: {}
+    technology:
+      exclude: []
+    users:
+    - name: "test"
+      credentials:
+        username: "a@a"
+        password: "aaaaa"
+  parameters:
+    failOnError: true
+    failOnWarning: false
+    progressToStdout: true
+  vars: {}
+jobs:
+- parameters:
+    maxAlertsPerRule: 0
+    scanOnlyInScope: true
+    maxBodySizeInBytesToScan: 0
+    enableTags: false
+    disableAllRules: true
+  
+  name: "passiveScan-config"
+  type: "passiveScan-config"

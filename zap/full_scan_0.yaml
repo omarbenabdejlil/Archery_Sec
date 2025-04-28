@@ -1,0 +1,35 @@
+---
+env:
+  contexts:
+  - name: "context"
+    urls:
+      - "http://localhost:8090/UI/alertFilter/"
+    excludePaths: []
+    sessionManagement:
+      method: "cookie"
+      parameters: {}
+    technology:
+      exclude: []
+
+jobs:
+  # Ajax Spider 
+- parameters:
+    maxDuration: 2
+    maxCrawlDepth: 10
+    numberOfBrowsers: 16
+    inScopeOnly: true
+  name: "spiderAjax"
+  type: "spiderAjax"
+
+  # Full Scan
+- parameters:
+  policyDefinition:
+    defaultStrength: "low"
+    defaultThreshold: "off"
+    rules: 
+    - id: 40027
+      name: "SQL Injection - MsSQL"
+      threshold: "low"
+      strength: "low"
+  name: "activeScan"
+  type: "activeScan"
